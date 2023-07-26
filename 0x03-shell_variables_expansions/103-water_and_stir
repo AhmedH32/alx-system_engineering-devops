@@ -1,14 +1,2 @@
 #!/bin/bash
-
-# Convert WATER and STIR from their respective bases to base 10
-water_base10=$(echo "ibase=${WATER%:*}; ${WATER#*:}" | bc)
-stir_base10=$(echo "ibase=${STIR%:*}; ${STIR#*:}" | bc)
-
-# Calculate the sum in base 10
-sum_base10=$((water_base10 + stir_base10))
-
-# Convert the result from base 10 to base BESTCHOL
-result_bestchol=$(echo "obase=${BESTCHOL%:*}; $sum_base10" | bc)
-
-# Print the result
-echo "The sum is: $result_bestchol"
+printf "%s\n" "$((5#${WATER//*:/} + 5#${STIR//*:/}))" | bc | tr 01234567 bestchol
